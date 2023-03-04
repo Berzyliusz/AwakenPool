@@ -1,4 +1,5 @@
 using AwakenPool.Inputs;
+using AwakenPool.UI;
 using System.Linq;
 using UnityEngine;
 
@@ -7,6 +8,7 @@ namespace AwakenPool
     public class GameStarter : MonoBehaviour
     {
         [SerializeField] CueController cueController;
+        [SerializeField] GameParamsDisplayer gameParamsDisplayer;
 
         // This could be expanded into some 'GameSetupProvided'
         // that allows selection of levels
@@ -41,6 +43,7 @@ namespace AwakenPool
             var ballSettler = new BallsSettler(allBalls, Mathf.Epsilon);
             gameController = new GameController(gameSetup, cueController, ballSettler, scoreController);
 
+            gameParamsDisplayer.SetScoreUpdateEvent(scoreController);
             // Setup UI:
             // Game won
             // Game lost

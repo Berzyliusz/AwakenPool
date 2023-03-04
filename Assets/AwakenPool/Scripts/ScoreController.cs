@@ -2,11 +2,18 @@
 
 namespace AwakenPool
 {
-    public class ScoreController
+    public interface IScoreHandler
+    {
+        int CurrentScore { get; }
+        bool IsGameWon { get; }
+        event Action<int, int> OnScoreUpdated;
+    }
+
+    public class ScoreController : IScoreHandler
     {
         public int CurrentScore { get; private set; }
         public bool IsGameWon => CurrentScore > scoreToWin;
-        public event Action<int> OnScoreUpdated;
+        public event Action<int,int> OnScoreUpdated;
 
         readonly int scoreToWin;
 
@@ -23,7 +30,7 @@ namespace AwakenPool
         void HandleBallDestroyed(Ball ball)
         {
             CurrentScore += ball.PointsForHit;
-            OnScoreUpdated?.Invoke(CurrentScore);
+            OnScoreUpdated?.Invoke(CurrentScore, scoreToWin);
         }
     }
 }

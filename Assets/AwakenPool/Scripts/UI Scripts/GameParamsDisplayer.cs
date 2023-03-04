@@ -8,6 +8,18 @@ namespace AwakenPool.UI
         [SerializeField] TextMeshProUGUI scoreText;
         [SerializeField] TextMeshProUGUI movesText;
 
+        public void SetScoreUpdateEvent(ScoreController scoreController)
+        {
+            scoreController.OnScoreUpdated += UpdateScoreText;
+            UpdateScoreText(0, scoreController.CurrentScore);
+        }
+
+        void Awake()
+        {
+            scoreText.text = string.Empty;
+            movesText.text = string.Empty;
+        }
+
         void UpdateScoreText(int currentScore, int neededScore)
         {
             scoreText.text = currentScore + " / " + neededScore;
