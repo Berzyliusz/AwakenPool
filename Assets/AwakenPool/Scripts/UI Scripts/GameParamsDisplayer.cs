@@ -8,10 +8,10 @@ namespace AwakenPool.UI
         [SerializeField] TextMeshProUGUI scoreText;
         [SerializeField] TextMeshProUGUI movesText;
 
-        public void SetScoreUpdateEvent(ScoreController scoreController)
+        public void SetScoreHandling(IScoreHandler scoreHandler)
         {
-            scoreController.OnScoreUpdated += UpdateScoreText;
-            UpdateScoreText(0, scoreController.CurrentScore);
+            scoreHandler.OnScoreUpdated += UpdateScoreText;
+            UpdateScoreText(0, scoreHandler.ScoreToWin);
         }
 
         void Awake()

@@ -43,7 +43,7 @@ namespace AwakenPool
             var ballSettler = new BallsSettler(allBalls, Mathf.Epsilon);
             gameController = new GameController(gameSetup, cueController, ballSettler, scoreController);
 
-            gameParamsDisplayer.SetScoreUpdateEvent(scoreController);
+            gameParamsDisplayer.SetScoreHandling(scoreController);
             // Setup UI:
             // Game won
             // Game lost
