@@ -44,10 +44,11 @@ namespace AwakenPool
             gameController = new GameController(gameSetup, cueController, ballSettler, scoreController);
 
             gameParamsDisplayer.SetScoreHandling(scoreController);
+            gameParamsDisplayer.SetMovesHandling(gameController);
+
             // Setup UI:
             // Game won
             // Game lost
-            // Score + moves display
         }
 
         void SetupBalls(GameSetup gameSetup)

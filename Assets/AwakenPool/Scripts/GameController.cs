@@ -11,15 +11,16 @@ namespace AwakenPool
         Lost
     };
 
-    public class GameController
+    public class GameController : IMovesHandler
     {
+        public event Action<int, int> OnMoveMade;
+        public int CurrentMoves { get; private set; }
+        public int MaxMoves { get; private set; }
+
         readonly GameSetup gameSetup;
         readonly CueController cueController;
         readonly BallsSettler ballSettler;
         readonly ScoreController scoreController;
-
-        int movesMade;
-        int maxMoves;
 
         GameState currentState;
 
@@ -30,7 +31,7 @@ namespace AwakenPool
             this.cueController = cueController;
             this.ballSettler = ballSettler;
             this.scoreController = scoreController;
-            maxMoves = gameSetup.MaxMoves;
+            MaxMoves = gameSetup.MaxMoves;
 
             currentState = GameState.CueMove;
 
@@ -60,9 +61,9 @@ namespace AwakenPool
 
         void HandleForceApplied()
         {
-            movesMade++;
+            CurrentMoves++;
             currentState = GameState.BallSettling;
-
+            OnMoveMade?.Invoke(CurrentMoves, MaxMoves);
             // Todo: Wait a couple of frames, for rigidbody to gain velocity
         }
 
@@ -82,7 +83,7 @@ namespace AwakenPool
                 return;
             }
 
-            if(movesMade > maxMoves)
+            if(CurrentMoves > MaxMoves)
             {
                 currentState= GameState.Lost;
                 return;

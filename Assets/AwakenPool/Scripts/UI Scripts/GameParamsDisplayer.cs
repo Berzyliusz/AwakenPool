@@ -14,6 +14,12 @@ namespace AwakenPool.UI
             UpdateScoreText(0, scoreHandler.ScoreToWin);
         }
 
+        public void SetMovesHandling(IMovesHandler moveHandler)
+        {
+            moveHandler.OnMoveMade += UpdateMovesText;
+            UpdateMovesText(0, moveHandler.MaxMoves);
+        }
+
         void Awake()
         {
             scoreText.text = string.Empty;
