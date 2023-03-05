@@ -11,9 +11,11 @@ namespace AwakenPool.Gameplay
         Lost
     };
 
-    public class GameController : IMovesHandler
+    public class GameController : IMovesHandler, IGameEnder
     {
         public event Action<int, int> OnMoveMade;
+        public event Action OnGameWon;
+        public event Action OnGameLost;
         public int CurrentMoves { get; private set; }
         public int MaxMoves { get; private set; }
 
