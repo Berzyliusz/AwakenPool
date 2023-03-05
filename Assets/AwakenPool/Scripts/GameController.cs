@@ -8,7 +8,8 @@ namespace AwakenPool.Gameplay
         CueMove,
         BallSettling,
         Won,
-        Lost
+        Lost,
+        Ended
     };
 
     public class GameController : IMovesHandler, IGameEnder
@@ -49,7 +50,8 @@ namespace AwakenPool.Gameplay
             if (Time.time < timeOfStateChange + stateChangeDuration)
                 return;
 
-            Debug.Log(currentState);
+            if (currentState == GameState.Ended)
+                return;
 
             switch (currentState)
             {
@@ -59,10 +61,12 @@ namespace AwakenPool.Gameplay
                     WaitForBallsSettled();
                     break;
                     case GameState.Won:
-                    // Display game won, stop updating
+                    currentState = GameState.Ended;
+                    OnGameWon?.Invoke();
                     break;
                     case GameState.Lost:
-                    // Display game lost, stop updating
+                    currentState = GameState.Ended;
+                    OnGameLost?.Invoke();
                     break;
             }
         }
@@ -78,18 +82,14 @@ namespace AwakenPool.Gameplay
             CurrentMoves++;
             ChangeGameState(GameState.BallSettling);
             OnMoveMade?.Invoke(CurrentMoves, MaxMoves);
-            // Todo: Wait a couple of frames, for rigidbody to gain velocity
         }
 
         void WaitForBallsSettled()
         {
             if (!ballSettler.AreBallsSettled())
             {
-                Debug.Log("Balls not settled");
                 return;
             }
-
-            Debug.Log("Balls settled");
 
             if (scoreController.IsGameWon)
             {
@@ -97,7 +97,7 @@ namespace AwakenPool.Gameplay
                 return;
             }
 
-            if(CurrentMoves > MaxMoves)
+            if(CurrentMoves >= MaxMoves)
             {
                 ChangeGameState(GameState.Lost);
                 return;

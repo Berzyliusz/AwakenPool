@@ -3,8 +3,11 @@ using UnityEngine;
 
 namespace AwakenPool.UI
 {
-    public class GameEndUI : MonoBehaviour
+    public class GameEndDisplayer : MonoBehaviour
     {
+        [SerializeField] GameObject gameWonPopup;
+        [SerializeField] GameObject gameLostPopup;
+
         public void SetGameEndHandling(IGameEnder gameEnder)
         {
             gameEnder.OnGameWon += HandleGameWon;
@@ -13,12 +16,18 @@ namespace AwakenPool.UI
 
         void HandleGameWon()
         {
-            
+            gameWonPopup.SetActive(true);
         }
 
         void HandleGameLost()
         {
-            
+            gameLostPopup.SetActive(true);
+        }
+
+        void Awake()
+        {
+            gameWonPopup.SetActive(false);
+            gameLostPopup.SetActive(false);
         }
     }
 }

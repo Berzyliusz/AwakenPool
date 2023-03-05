@@ -10,6 +10,7 @@ namespace AwakenPool
     {
         [SerializeField] CueController cueController;
         [SerializeField] GameParamsDisplayer gameParamsDisplayer;
+        [SerializeField] GameEndDisplayer gameEndDisplayer;
 
         // This could be expanded into some 'GameSetupProvided'
         // that allows selection of levels
@@ -46,10 +47,7 @@ namespace AwakenPool
 
             gameParamsDisplayer.SetScoreHandling(scoreController);
             gameParamsDisplayer.SetMovesHandling(gameController);
-
-            // Setup UI:
-            // Game won
-            // Game lost
+            gameEndDisplayer.SetGameEndHandling(gameController);
         }
 
         void SetupBalls(GameSetup gameSetup)
