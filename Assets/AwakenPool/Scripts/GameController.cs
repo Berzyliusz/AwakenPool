@@ -22,6 +22,9 @@ namespace AwakenPool
         readonly BallsSettler ballSettler;
         readonly ScoreController scoreController;
 
+        const float stateChangeDuration = 0.1f;
+        float timeOfStateChange;
+
         GameState currentState;
 
         public GameController(GameSetup gameSetup, CueController cueController, 
@@ -33,7 +36,7 @@ namespace AwakenPool
             this.scoreController = scoreController;
             MaxMoves = gameSetup.MaxMoves;
 
-            currentState = GameState.CueMove;
+            ChangeGameState(GameState.CueMove);
 
             cueController.OnForceApplied += HandleForceApplied;
             cueController.SetCueActive(true);
@@ -41,6 +44,9 @@ namespace AwakenPool
 
         public void Update()
         {
+            if (Time.time < timeOfStateChange + stateChangeDuration)
+                return;
+
             Debug.Log(currentState);
 
             switch (currentState)
@@ -59,10 +65,16 @@ namespace AwakenPool
             }
         }
 
+        void ChangeGameState(GameState newState)
+        {
+            timeOfStateChange = Time.time;
+            currentState = newState;
+        }
+
         void HandleForceApplied()
         {
             CurrentMoves++;
-            currentState = GameState.BallSettling;
+            ChangeGameState(GameState.BallSettling);
             OnMoveMade?.Invoke(CurrentMoves, MaxMoves);
             // Todo: Wait a couple of frames, for rigidbody to gain velocity
         }
@@ -79,17 +91,17 @@ namespace AwakenPool
 
             if (scoreController.IsGameWon)
             {
-                currentState = GameState.Won;
+                ChangeGameState(GameState.Won);
                 return;
             }
 
             if(CurrentMoves > MaxMoves)
             {
-                currentState= GameState.Lost;
+                ChangeGameState(GameState.Lost);
                 return;
             }
 
-            currentState = GameState.CueMove;
+            ChangeGameState(GameState.CueMove);
             cueController.SetCueActive(true);
         }
     }

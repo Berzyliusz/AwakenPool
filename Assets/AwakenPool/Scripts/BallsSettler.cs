@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using UnityEngine;
 
 namespace AwakenPool
 {
@@ -32,7 +31,6 @@ namespace AwakenPool
             {
                 if(ball.Rigidbody.velocity.sqrMagnitude > movementThresholdSquared)
                 {
-                    Debug.Log($"Ball not settled: " + ball.gameObject.name);
                     areSettled = false; 
                     break;
                 }

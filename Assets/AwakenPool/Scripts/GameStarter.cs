@@ -36,7 +36,7 @@ namespace AwakenPool
         {
             SetupBalls(gameSetup);
 
-            cueController.Initialize(inputs, gameSetup.PlayableBall, gameSetup.CueParent, gameSetup.CueObject);
+            cueController.Initialize(inputs, gameSetup);
             var scoreController = new ScoreController(gameSetup.Balls, gameSetup.ScoreToWin);
             var allBalls = gameSetup.Balls.ToList();
             allBalls.Add(gameSetup.PlayableBall);

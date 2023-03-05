@@ -5,28 +5,37 @@ using UnityEngine;
 namespace AwakenPool
 {
     /// <summary>
-    /// Handles the pool cue.
+    /// Handles the pool cue, including movement, rotation and force.
     /// </summary>
     public class CueController : MonoBehaviour
     {
         public event Action OnForceApplied;
 
-        IInputs inputs;
+        [SerializeField] float forceMul = 1.0f;
+        const float minimalCueOffset = -0.3f;
 
+        IInputs inputs;
         Ball playableBall;
         Transform playableBallTransform;
         Transform cueRotator;
         Transform cueVisual;
+        Vector2 forceMinMax;
+        Vector3 originalCueScale;
+        float originalCueOffset;
 
-        [SerializeField] float forceMul = 1.0f;
+        float currentForce;
 
-        public void Initialize(IInputs inputs, Ball playableBall, Transform cueRotator, Transform cueVisual)
+        public void Initialize(IInputs inputs, GameSetup setup)
         {
             this.inputs = inputs;
-            this.playableBall = playableBall;
-            this.cueRotator = cueRotator;
-            this.cueVisual = cueVisual;
+            playableBall = setup.PlayableBall;
+            cueRotator = setup.CueParent;
+            cueVisual = setup.CueObject;
+            forceMinMax = setup.ForceMinMax;
             playableBallTransform = playableBall.transform;
+            originalCueScale = setup.CueObject.localScale;
+            originalCueOffset = setup.CueObject.localPosition.z;
+            currentForce = 1.0f;
 
             enabled = false;
         }
@@ -37,6 +46,8 @@ namespace AwakenPool
             {
                 enabled = true;
                 UpdateCuePosition();
+                currentForce = 0f;
+                AdjustCueForce(1.0f);
                 cueVisual.gameObject.SetActive(true);
             }
             else
@@ -49,6 +60,7 @@ namespace AwakenPool
         void Update()
         {
             var rotationSpeed = 100 * Time.deltaTime;
+            var forceIncrease = 0.5f;
             UpdateCuePosition();
 
             if (inputs.RotateLeft)
@@ -57,7 +69,11 @@ namespace AwakenPool
             if(inputs.RotateRight)
                 RotateCue(-rotationSpeed);
 
-            AdjustCueForce();
+            if(inputs.IncreaseForce)
+                AdjustCueForce(forceIncrease);
+            else
+            if(inputs.DecreaseForce)
+                AdjustCueForce(-forceIncrease);
 
             if (inputs.ApplyForce)
                 ApplyForceToBall();
@@ -73,17 +89,27 @@ namespace AwakenPool
             cueRotator.Rotate(0, rotation, 0);
         }
 
-        void AdjustCueForce()
+        void AdjustCueForce(float force)
         {
-            // Store force up or down
-            // Clamp force from params
-            // Adjust cue length to the given force
+            currentForce += force;
+            currentForce = Mathf.Clamp(currentForce, forceMinMax.x, forceMinMax.y);
+            AdjustCueVisualObjectPositionAndScale();
+        }
+
+        private void AdjustCueVisualObjectPositionAndScale()
+        {
+            cueVisual.localScale = originalCueScale * currentForce;
+            cueVisual.localPosition = new Vector3(
+                cueVisual.localPosition.x,
+                cueVisual.localPosition.y,
+                Mathf.Lerp(minimalCueOffset, originalCueOffset, currentForce / forceMinMax.y));
         }
 
         void ApplyForceToBall()
         {
             var directionNormalized = CalculateNormalizedDirection();
-            playableBall.Rigidbody.AddForce(directionNormalized * forceMul, ForceMode.Impulse);
+            var forceToApply = directionNormalized * currentForce * forceMul;
+            playableBall.Rigidbody.AddForce(forceToApply, ForceMode.Impulse);
 
             OnForceApplied?.Invoke();
             SetCueActive(false);
