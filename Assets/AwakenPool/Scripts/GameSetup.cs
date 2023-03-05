@@ -1,3 +1,4 @@
+using AwakenPool.Gameplay;
 using UnityEngine;
 
 namespace AwakenPool
@@ -9,8 +10,7 @@ namespace AwakenPool
         [field: SerializeField] public int ScoreToWin { get; private set; }
 
         [field: SerializeField] public Ball PlayableBall { get; private set; }
-        [field: SerializeField] public Transform CueParent { get; private set; }
-        [field: SerializeField] public Transform CueObject { get; private set; }
+        [field: SerializeField] public Cue Cue { get; private set; }
         [field: SerializeField] public Ball[] Balls { get; private set; }
         [field: SerializeField] public HitablePost[] Posts { get; private set; }
     }

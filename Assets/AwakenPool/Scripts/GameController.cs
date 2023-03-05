@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace AwakenPool
+namespace AwakenPool.Gameplay
 {
     public enum GameState
     {

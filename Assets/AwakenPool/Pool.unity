@@ -635,6 +635,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 353289860}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &353289862 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1522178759291739598, guid: a35410bcde5aac944a1d9922c1ff8358,
+    type: 3}
+  m_PrefabInstance: {fileID: 353289860}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6e46eb1d9b621e40a863f94f2d01747, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &503618619
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -832,12 +844,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7523677253903725036, guid: 41ca434df4735714f86627c4901e70ec,
     type: 3}
   m_PrefabInstance: {fileID: 7523677253393025704}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &805396397 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2178575081008171346, guid: a35410bcde5aac944a1d9922c1ff8358,
-    type: 3}
-  m_PrefabInstance: {fileID: 353289860}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &808078827
 PrefabInstance:
@@ -1995,8 +2001,7 @@ MonoBehaviour:
   <MaxMoves>k__BackingField: 20
   <ScoreToWin>k__BackingField: 30
   <PlayableBall>k__BackingField: {fileID: 1657867807}
-  <CueParent>k__BackingField: {fileID: 353289861}
-  <CueObject>k__BackingField: {fileID: 805396397}
+  <Cue>k__BackingField: {fileID: 353289862}
   <Balls>k__BackingField:
   - {fileID: 987786817}
   - {fileID: 503618621}

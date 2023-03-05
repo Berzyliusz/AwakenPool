@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace AwakenPool
+namespace AwakenPool.Gameplay
 {
     [RequireComponent(typeof(Rigidbody))]
     [RequireComponent(typeof(SphereCollider))]

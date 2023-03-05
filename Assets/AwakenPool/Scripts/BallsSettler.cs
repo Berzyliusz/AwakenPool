@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace AwakenPool
+namespace AwakenPool.Gameplay
 {
     public class BallsSettler
     {
