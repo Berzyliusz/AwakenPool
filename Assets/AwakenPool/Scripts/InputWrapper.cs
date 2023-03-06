@@ -13,5 +13,9 @@ namespace AwakenPool.Inputs
         public bool DecreaseForce => Input.GetKeyDown(KeyCode.S);
 
         public bool ApplyForce => Input.GetKeyDown(KeyCode.Space);
+
+        public bool RestartGame => Input.GetKeyDown(KeyCode.R);
+
+        public bool AnyInput => Input.anyKeyDown;
     }
 }

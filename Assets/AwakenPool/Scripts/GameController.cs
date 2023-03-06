@@ -53,18 +53,23 @@ namespace AwakenPool.Gameplay
             if (currentState == GameState.Ended)
                 return;
 
+            ProcessGameState();
+        }
+
+        void ProcessGameState()
+        {
             switch (currentState)
             {
                 case GameState.CueMove:
                     break;
-                    case GameState.BallSettling:
+                case GameState.BallSettling:
                     WaitForBallsSettled();
                     break;
-                    case GameState.Won:
+                case GameState.Won:
                     currentState = GameState.Ended;
                     OnGameWon?.Invoke();
                     break;
-                    case GameState.Lost:
+                case GameState.Lost:
                     currentState = GameState.Ended;
                     OnGameLost?.Invoke();
                     break;

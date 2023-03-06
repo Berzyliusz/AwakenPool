@@ -6,6 +6,7 @@ using UnityEngine;
 
 namespace AwakenPool
 {
+
     public class GameStarter : MonoBehaviour
     {
         [SerializeField] CueController cueController;
@@ -17,6 +18,7 @@ namespace AwakenPool
         [SerializeField] GameSetup gameSetup;
 
         GameController gameController;
+        GameRestarter gameRestarer;
         IInputs inputs;
 
         void Awake()
@@ -44,6 +46,7 @@ namespace AwakenPool
             allBalls.Add(gameSetup.PlayableBall);
             var ballSettler = new BallsSettler(allBalls, Mathf.Epsilon);
             gameController = new GameController(gameSetup, cueController, ballSettler, scoreController);
+            gameRestarer = new GameRestarter(gameController);
 
             gameParamsDisplayer.SetScoreHandling(scoreController);
             gameParamsDisplayer.SetMovesHandling(gameController);
