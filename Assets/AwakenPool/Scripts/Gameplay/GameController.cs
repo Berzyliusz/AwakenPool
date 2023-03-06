@@ -86,6 +86,8 @@ namespace AwakenPool.Gameplay
                 return;
             }
 
+            ballSettler.StopBallsMovement();
+
             if (scoreController.IsGameWon)
             {
                 ChangeGameState(GameState.Won);

@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace AwakenPool.Gameplay
 {
     public class BallsSettler
     {
         readonly List<Ball> balls;
-        const float movementThreshold = 0.005f;
+        const float movementThreshold = 0.003f;
 
         public BallsSettler(List<Ball> balls)
         {
@@ -36,6 +37,15 @@ namespace AwakenPool.Gameplay
             }
 
             return areSettled;
+        }
+
+        public void StopBallsMovement()
+        {
+            foreach(var ball in balls)
+            {
+                ball.Rigidbody.velocity = Vector3.zero;
+                ball.Rigidbody.angularVelocity = Vector3.zero;
+            }
         }
     }
 }
