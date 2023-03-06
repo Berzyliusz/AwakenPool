@@ -7,7 +7,7 @@ namespace AwakenPool
     {
         [Tooltip("Global multiplier for force, so we can operate on sane numbers. " +
             "Larger value means harder hits on ball.")]
-        [field: SerializeField] public float ForceMultiplier { get; private set; } = 1.0f;
+        [field: SerializeField] public float ForceMultiplier { get; private set; } = 25.0f;
         [Tooltip("How fast is the cue rotating around playable ball. " +
             "Larger value means faster rotation.")]
         [field: SerializeField] public float RotationSpeed { get; private set; } = 100;

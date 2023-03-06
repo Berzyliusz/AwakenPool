@@ -30,7 +30,12 @@ namespace AwakenPool.Gameplay
 
         public void AdjustCueVisualObjectPositionAndScale(float currentForce, float maxForce)
         {
-            CueVisualObject.localScale = originalCueScale * currentForce;
+            CueVisualObject.localScale = new Vector3(
+                originalCueScale.x,
+                originalCueScale.y * currentForce,
+                originalCueScale.z
+                );
+                
             CueVisualObject.localPosition = new Vector3(
                 CueVisualObject.localPosition.x,
                 CueVisualObject.localPosition.y,
