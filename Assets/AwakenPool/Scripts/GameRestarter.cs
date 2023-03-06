@@ -9,6 +9,13 @@ namespace AwakenPool
         bool gameEnded;
         readonly IInputs inputs;
 
+        public GameRestarter(IGameEnder gameEnder, IInputs inputs)
+        {
+            gameEnder.OnGameLost += HandleGameEnded;
+            gameEnder.OnGameWon += HandleGameEnded;
+            this.inputs = inputs;
+        }
+
         public void Update()
         {
             if(inputs.RestartGame)
@@ -16,13 +23,6 @@ namespace AwakenPool
 
             if(gameEnded && inputs.AnyInput)
                 RestartScene();
-        }
-
-        public GameRestarter(IGameEnder gameEnder, IInputs inputs)
-        {
-            gameEnder.OnGameLost += HandleGameEnded;
-            gameEnder.OnGameWon += HandleGameEnded;
-            this.inputs = inputs;
         }
 
         void HandleGameEnded()

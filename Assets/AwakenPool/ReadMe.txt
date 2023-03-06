@@ -5,6 +5,10 @@ How to add new ball types:
 4. Place and use in the scene.
 
 How to add new levels:
+Each level needs ONE playable ball, that we will controll.
+Each level needs ONE cue that will controll the ball.
+Those might be of different colors or sizes in between levels.
+
 1. Duplicate "Level 1 Setup" prefab. ( Check out "Level 2 Setup")
 2. Place balls the way you want to.
 3. Place obstacles if needed.

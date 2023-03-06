@@ -15,8 +15,12 @@ namespace AwakenPool
             "Larger value means bigger increase, thus fewer steps to regulate the force.")]
         [field: SerializeField] public float ForceIncreaseStep { get; private set; } = 0.5f;
 
+        [Tooltip("Minimum and maximum force values for cue. Default value is 1." +
+            "Larger value means we can set harder force.")]
         [field: SerializeField] public Vector2 ForceMinMax { get; private set; } = new Vector2(0.2f, 2f);
+        [Tooltip("How many moves player can make before loosing.")]
         [field: SerializeField] public int MaxMoves { get; private set; } = 10;
+        [Tooltip("How many points player needs to win.")]
         [field: SerializeField] public int ScoreToWin { get; private set; } = 30;
 
         [field: SerializeField] public Ball PlayableBall { get; private set; }
