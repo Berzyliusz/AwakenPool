@@ -5,7 +5,7 @@ namespace AwakenPool.Gameplay
     public class BallsSettler
     {
         readonly List<Ball> balls;
-        const float movementThreshold = 0.02f;
+        const float movementThreshold = 0.005f;
 
         public BallsSettler(List<Ball> balls)
         {
