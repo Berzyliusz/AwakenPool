@@ -4,14 +4,19 @@ using UnityEngine;
 
 namespace AwakenPool.Gameplay
 {
-    /// <summary>
-    /// Handles the pool cue, including movement, rotation and force.
-    /// </summary>
     public class CueController : MonoBehaviour
     {
         public event Action OnForceApplied;
 
+        [Tooltip("Global multiplier for force, so we can operate on sane numbers. " +
+            "Larger value means harder hits on ball.")]
         [SerializeField] float forceMul = 1.0f;
+        [Tooltip("How fast is the cue rotating around playable ball. " +
+            "Larger value means faster rotation.")]
+        [SerializeField] float rotationSpeed = 100;
+        [Tooltip("How much we increase the cue force with each tap button." +
+            "Larger value means bigger increase, thus fewer steps to regulate the force.")]
+        [SerializeField] float forceIncreaseStep = 0.5f;
 
         IInputs inputs;
         Ball playableBall;
@@ -51,21 +56,19 @@ namespace AwakenPool.Gameplay
 
         void Update()
         {
-            var rotationSpeed = 100 * Time.deltaTime;
-            var forceIncrease = 0.5f;
             cue.SetCuePosition(playableBallTransform.position);
 
             if (inputs.RotateLeft)
-                cue.RotateCue(rotationSpeed);
+                cue.RotateCue(rotationSpeed * Time.deltaTime);
             else
             if(inputs.RotateRight)
-                cue.RotateCue(-rotationSpeed);
+                cue.RotateCue(-rotationSpeed * Time.deltaTime);
 
             if(inputs.IncreaseForce)
-                AdjustCueForce(forceIncrease);
+                AdjustCueForce(forceIncreaseStep);
             else
             if(inputs.DecreaseForce)
-                AdjustCueForce(-forceIncrease);
+                AdjustCueForce(-forceIncreaseStep);
 
             if (inputs.ApplyForce)
                 ApplyForceToBall();

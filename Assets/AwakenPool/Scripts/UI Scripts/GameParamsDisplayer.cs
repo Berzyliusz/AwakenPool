@@ -20,12 +20,6 @@ namespace AwakenPool.UI
             UpdateMovesText(0, moveHandler.MaxMoves);
         }
 
-        void Awake()
-        {
-            scoreText.text = string.Empty;
-            movesText.text = string.Empty;
-        }
-
         void UpdateScoreText(int currentScore, int neededScore)
         {
             scoreText.text = currentScore + " / " + neededScore;
@@ -34,6 +28,12 @@ namespace AwakenPool.UI
         void UpdateMovesText(int currentMoves, int neededMoves)
         {
             movesText.text = currentMoves + " / " + neededMoves;
+        }
+
+        void Awake()
+        {
+            scoreText.text = string.Empty;
+            movesText.text = string.Empty;
         }
     }
 }

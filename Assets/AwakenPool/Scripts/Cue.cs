@@ -2,9 +2,6 @@ using UnityEngine;
 
 namespace AwakenPool.Gameplay
 {
-    /// <summary>
-    /// Handles the Cue visual reperesntation
-    /// </summary>
     public class Cue : MonoBehaviour
     {
         [field: SerializeField] public Transform CueRotationObject { get; private set; }

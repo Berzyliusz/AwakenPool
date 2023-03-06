@@ -5,7 +5,7 @@ namespace AwakenPool.Gameplay
     public class BallsSettler
     {
         readonly List<Ball> balls;
-        const float movementThresholdSquared = 0.01f;
+        const float movementThreshold = 0.01f;
 
         public BallsSettler(List<Ball> balls)
         {
@@ -28,7 +28,7 @@ namespace AwakenPool.Gameplay
 
             foreach (Ball ball in balls)
             {
-                if(ball.Rigidbody.velocity.sqrMagnitude > movementThresholdSquared)
+                if(ball.Rigidbody.velocity.sqrMagnitude > movementThreshold)
                 {
                     areSettled = false; 
                     break;

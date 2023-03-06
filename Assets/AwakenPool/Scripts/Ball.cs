@@ -10,7 +10,6 @@ namespace AwakenPool.Gameplay
         [field: SerializeField] public int PointsForHit { get; private set; } = 10;
 
         public Rigidbody Rigidbody { get; private set; }
-
         public event Action<Ball> OnBallDestroyed;
 
         bool isPlayableBall;
