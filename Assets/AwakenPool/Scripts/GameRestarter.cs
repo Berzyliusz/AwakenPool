@@ -1,5 +1,5 @@
 ﻿using AwakenPool.Gameplay;
-using System;
+using AwakenPool.Inputs;
 using UnityEngine.SceneManagement;
 
 namespace AwakenPool
@@ -7,18 +7,22 @@ namespace AwakenPool
     public class GameRestarter
     {
         bool gameEnded;
+        readonly IInputs inputs;
 
         public void Update()
         {
-            // restart on button 
+            if(inputs.RestartGame)
+                RestartScene();
 
-            // restart on any when game ended
+            if(gameEnded && inputs.AnyInput)
+                RestartScene();
         }
 
-        public GameRestarter(IGameEnder gameEnder)
+        public GameRestarter(IGameEnder gameEnder, IInputs inputs)
         {
             gameEnder.OnGameLost += HandleGameEnded;
             gameEnder.OnGameWon += HandleGameEnded;
+            this.inputs = inputs;
         }
 
         void HandleGameEnded()

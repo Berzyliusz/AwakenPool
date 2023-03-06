@@ -12,6 +12,6 @@ namespace AwakenPool
         [field: SerializeField] public Ball PlayableBall { get; private set; }
         [field: SerializeField] public Cue Cue { get; private set; }
         [field: SerializeField] public Ball[] Balls { get; private set; }
-        [field: SerializeField] public HitablePost[] Posts { get; private set; }
+        [field: SerializeField] public Transform[] Posts { get; private set; }
     }
 }

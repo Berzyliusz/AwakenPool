@@ -5,12 +5,11 @@ namespace AwakenPool.Gameplay
     public class BallsSettler
     {
         readonly List<Ball> balls;
-        readonly float movementThresholdSquared;
+        const float movementThresholdSquared = 0.01f;
 
-        public BallsSettler(List<Ball> balls, float movementThreshold)
+        public BallsSettler(List<Ball> balls)
         {
             this.balls = balls;
-            movementThresholdSquared =  movementThreshold * movementThreshold;
 
             foreach(var ball in balls)
             {

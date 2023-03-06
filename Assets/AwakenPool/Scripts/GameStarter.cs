@@ -34,6 +34,7 @@ namespace AwakenPool
         void Update()
         {
             gameController.Update();
+            gameRestarer.Update();
         }
 
         public void StartGame(GameSetup gameSetup)
@@ -44,9 +45,9 @@ namespace AwakenPool
             var scoreController = new ScoreController(gameSetup.Balls, gameSetup.ScoreToWin);
             var allBalls = gameSetup.Balls.ToList();
             allBalls.Add(gameSetup.PlayableBall);
-            var ballSettler = new BallsSettler(allBalls, Mathf.Epsilon);
+            var ballSettler = new BallsSettler(allBalls);
             gameController = new GameController(gameSetup, cueController, ballSettler, scoreController);
-            gameRestarer = new GameRestarter(gameController);
+            gameRestarer = new GameRestarter(gameController, inputs);
 
             gameParamsDisplayer.SetScoreHandling(scoreController);
             gameParamsDisplayer.SetMovesHandling(gameController);
