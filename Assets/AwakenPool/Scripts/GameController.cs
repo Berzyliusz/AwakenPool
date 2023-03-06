@@ -3,15 +3,6 @@ using UnityEngine;
 
 namespace AwakenPool.Gameplay
 {
-    public enum GameState
-    {
-        CueMove,
-        BallSettling,
-        Won,
-        Lost,
-        Ended
-    };
-
     public class GameController : IMovesHandler, IGameEnder
     {
         public event Action<int, int> OnMoveMade;
@@ -20,7 +11,6 @@ namespace AwakenPool.Gameplay
         public int CurrentMoves { get; private set; }
         public int MaxMoves { get; private set; }
 
-        readonly GameSetup gameSetup;
         readonly CueController cueController;
         readonly BallsSettler ballSettler;
         readonly ScoreController scoreController;
@@ -33,7 +23,6 @@ namespace AwakenPool.Gameplay
         public GameController(GameSetup gameSetup, CueController cueController, 
             BallsSettler ballSettler, ScoreController scoreController)
         {
-            this.gameSetup = gameSetup;
             this.cueController = cueController;
             this.ballSettler = ballSettler;
             this.scoreController = scoreController;
@@ -61,6 +50,7 @@ namespace AwakenPool.Gameplay
             switch (currentState)
             {
                 case GameState.CueMove:
+                    // We could update the cue from here?
                     break;
                 case GameState.BallSettling:
                     WaitForBallsSettled();
