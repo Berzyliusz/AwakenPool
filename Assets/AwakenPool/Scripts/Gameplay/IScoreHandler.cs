@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace AwakenPool
+namespace AwakenPool.Gameplay
 {
     public interface IScoreHandler
     {
