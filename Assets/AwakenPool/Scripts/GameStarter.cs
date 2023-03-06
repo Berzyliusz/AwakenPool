@@ -9,7 +9,6 @@ namespace AwakenPool
 
     public class GameStarter : MonoBehaviour
     {
-        [SerializeField] CueController cueController;
         [SerializeField] GameParamsDisplayer gameParamsDisplayer;
         [SerializeField] GameEndDisplayer gameEndDisplayer;
 
@@ -17,6 +16,7 @@ namespace AwakenPool
         // that allows selection of levels
         [SerializeField] GameSetup gameSetup;
 
+        CueController cueController;
         GameController gameController;
         GameRestarter gameRestarer;
         IInputs inputs;
@@ -41,7 +41,7 @@ namespace AwakenPool
         {
             SetupBalls(gameSetup);
 
-            cueController.Initialize(inputs, gameSetup);
+            cueController = new CueController(inputs, gameSetup);
             var scoreController = new ScoreController(gameSetup.Balls, gameSetup.ScoreToWin);
             var allBalls = gameSetup.Balls.ToList();
             allBalls.Add(gameSetup.PlayableBall);

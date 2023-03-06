@@ -50,7 +50,7 @@ namespace AwakenPool.Gameplay
             switch (currentState)
             {
                 case GameState.CueMove:
-                    // We could update the cue from here?
+                    cueController.Update();
                     break;
                 case GameState.BallSettling:
                     WaitForBallsSettled();

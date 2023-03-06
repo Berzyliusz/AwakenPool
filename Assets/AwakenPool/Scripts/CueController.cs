@@ -4,19 +4,13 @@ using UnityEngine;
 
 namespace AwakenPool.Gameplay
 {
-    public class CueController : MonoBehaviour
+    public class CueController
     {
         public event Action OnForceApplied;
 
-        [Tooltip("Global multiplier for force, so we can operate on sane numbers. " +
-            "Larger value means harder hits on ball.")]
-        [SerializeField] float forceMul = 1.0f;
-        [Tooltip("How fast is the cue rotating around playable ball. " +
-            "Larger value means faster rotation.")]
-        [SerializeField] float rotationSpeed = 100;
-        [Tooltip("How much we increase the cue force with each tap button." +
-            "Larger value means bigger increase, thus fewer steps to regulate the force.")]
-        [SerializeField] float forceIncreaseStep = 0.5f;
+        readonly float forceMultiplier;
+        readonly float rotationSpeed;
+        readonly float forceIncreaseStep;
 
         IInputs inputs;
         Ball playableBall;
@@ -25,7 +19,7 @@ namespace AwakenPool.Gameplay
         Vector2 forceMinMax;
         float currentForce;
 
-        public void Initialize(IInputs inputs, GameSetup setup)
+        public CueController(IInputs inputs, GameSetup setup)
         {
             this.inputs = inputs;
             playableBall = setup.PlayableBall;
@@ -33,15 +27,15 @@ namespace AwakenPool.Gameplay
             forceMinMax = setup.ForceMinMax;
             playableBallTransform = playableBall.transform;
             currentForce = 1.0f;
-
-            enabled = false;
+            forceMultiplier = setup.ForceMultiplier;
+            rotationSpeed = setup.RotationSpeed;
+            forceIncreaseStep = setup.ForceIncreaseStep;
         }
 
         public void SetCueActive(bool isActive)
         {
             if(isActive)
             {
-                enabled = true;
                 cue.SetCuePosition(playableBallTransform.position);
                 currentForce = 0f;
                 AdjustCueForce(1.0f);
@@ -49,12 +43,11 @@ namespace AwakenPool.Gameplay
             }
             else
             {
-                enabled = false;
                 cue.SetCueVisible(false);
             }
         }
 
-        void Update()
+        public void Update()
         {
             cue.SetCuePosition(playableBallTransform.position);
 
@@ -84,7 +77,7 @@ namespace AwakenPool.Gameplay
         void ApplyForceToBall()
         {
             var directionNormalized = CalculateNormalizedDirection();
-            var forceToApply = directionNormalized * currentForce * forceMul;
+            var forceToApply = directionNormalized * currentForce * forceMultiplier;
             playableBall.Rigidbody.AddForce(forceToApply, ForceMode.Impulse);
 
             OnForceApplied?.Invoke();
