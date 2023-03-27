@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace AwakenPool.Gameplay
+namespace Pool.Gameplay
 {
     public class Cue : MonoBehaviour
     {

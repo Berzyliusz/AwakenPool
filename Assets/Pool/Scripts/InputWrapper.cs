@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace AwakenPool.Inputs
+namespace Pool.Inputs
 {
     public class InputWrapper : IInputs
     {

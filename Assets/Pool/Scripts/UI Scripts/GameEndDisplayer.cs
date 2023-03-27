@@ -1,7 +1,7 @@
-using AwakenPool.Gameplay;
+using Pool.Gameplay;
 using UnityEngine;
 
-namespace AwakenPool.UI
+namespace Pool.UI
 {
     public class GameEndDisplayer : MonoBehaviour
     {

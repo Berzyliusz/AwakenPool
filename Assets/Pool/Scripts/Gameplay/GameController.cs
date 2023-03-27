@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace AwakenPool.Gameplay
+namespace Pool.Gameplay
 {
     public class GameController : IMovesHandler, IGameEnder
     {

@@ -1,4 +1,4 @@
-namespace AwakenPool
+namespace Pool
 {
     public static class Statics
     {

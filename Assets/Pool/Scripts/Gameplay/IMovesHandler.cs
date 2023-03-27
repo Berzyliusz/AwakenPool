@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace AwakenPool.Gameplay
+namespace Pool.Gameplay
 {
     public interface IMovesHandler
     {

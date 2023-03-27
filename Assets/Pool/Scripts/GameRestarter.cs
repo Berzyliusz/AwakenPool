@@ -1,8 +1,8 @@
-﻿using AwakenPool.Gameplay;
-using AwakenPool.Inputs;
+﻿using Pool.Gameplay;
+using Pool.Inputs;
 using UnityEngine.SceneManagement;
 
-namespace AwakenPool
+namespace Pool
 {
     public class GameRestarter
     {

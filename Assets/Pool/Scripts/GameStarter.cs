@@ -1,10 +1,10 @@
-using AwakenPool.Gameplay;
-using AwakenPool.Inputs;
-using AwakenPool.UI;
+using Pool.Gameplay;
+using Pool.Inputs;
+using Pool.UI;
 using System.Linq;
 using UnityEngine;
 
-namespace AwakenPool
+namespace Pool
 {
     public class GameStarter : MonoBehaviour
     {

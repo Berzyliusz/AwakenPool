@@ -1,8 +1,8 @@
 using UnityEngine;
 using TMPro;
-using AwakenPool.Gameplay;
+using Pool.Gameplay;
 
-namespace AwakenPool.UI
+namespace Pool.UI
 {
     public class GameParamsDisplayer : MonoBehaviour
     {

@@ -1,4 +1,4 @@
-﻿namespace AwakenPool.Gameplay
+﻿namespace Pool.Gameplay
 {
     public enum GameState
     {

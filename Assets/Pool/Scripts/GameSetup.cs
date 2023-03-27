@@ -1,7 +1,7 @@
-using AwakenPool.Gameplay;
+using Pool.Gameplay;
 using UnityEngine;
 
-namespace AwakenPool
+namespace Pool
 {
     public class GameSetup : MonoBehaviour
     {

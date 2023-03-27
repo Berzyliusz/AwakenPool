@@ -1,4 +1,4 @@
-﻿namespace AwakenPool.Inputs
+﻿namespace Pool.Inputs
 {
     public interface IInputs
     {
